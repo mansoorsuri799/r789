@@ -27,18 +27,36 @@ const nextConfig = {
 
   async redirects() {
     return [
-      // /about was indexed by Google but the real page is /about-us
       {
         source: '/about',
         destination: '/about-us',
         permanent: true,
       },
       {
-        source: '/blog/create-account-login',
-        destination: '/blog/create-card-rummy-account-and-login',
+        source: '/download-card-rummy',
+        destination: '/download-r789',
         permanent: true,
       },
-      // Malformed URLs Google crawled — send them home
+      {
+        source: '/deposit-money-in-card-rummy',
+        destination: '/deposit-money-in-r789',
+        permanent: true,
+      },
+      {
+        source: '/withdraw-money-from-card-rummy',
+        destination: '/withdraw-money-from-r789',
+        permanent: true,
+      },
+      {
+        source: '/card-rummy-for-pc',
+        destination: '/r789-for-pc',
+        permanent: true,
+      },
+      {
+        source: '/blog/create-account-login',
+        destination: '/blog/r789-login-account-fixes-otp-password',
+        permanent: true,
+      },
       {
         source: '/\\$',
         destination: '/',
@@ -66,23 +84,27 @@ const nextConfig = {
       },
       {
         source: '/card-rummy-logo.webp',
-        destination: '/card-rummy.webp',
+        destination: '/r789.webp',
+        permanent: true,
+      },
+      {
+        source: '/card-rummy.webp',
+        destination: '/r789.webp',
+        permanent: true,
+      },
+      {
+        source: '/sitemap.xml',
+        destination: '/index.xml',
         permanent: true,
       },
     ];
   },
 
-  // Optimize static file serving
   async rewrites() {
     return [
       {
         source: '/.well-known/:path*',
         destination: '/public/.well-known/:path*',
-      },
-      // Redirect old 3Patti Blue logo to Card Rummy logo
-      {
-        source: '/3-patti-blue-logo.webp',
-        destination: '/card-rummy.webp',
       },
     ];
   },

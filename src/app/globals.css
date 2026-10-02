@@ -4,8 +4,10 @@
 
 :root {
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 2, 6, 23;
-  --background-end-rgb: 2, 6, 23;
+  --background-start-rgb: 6, 20, 40;
+  --background-end-rgb: 6, 20, 40;
+  --brand-primary: #061428;
+  --brand-accent: #38BDF8;
 }
 
 body {

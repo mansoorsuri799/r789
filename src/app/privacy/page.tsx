@@ -1,258 +1,268 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { SITE_ORIGIN } from '@/lib/schemaImageLicensing';
+import { SUPPORT_EMAIL, CORE_ROUTES } from '@/lib/appFacts';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy - Card Rummy | Your Privacy Matters',
-  description: 'Read our privacy policy to understand how Card Rummy collects, uses, and protects your personal information. We are committed to your data security.',
-  keywords: ['Card Rummy privacy policy', 'privacy', 'data protection', 'user privacy', 'data security'],
+  title: 'Privacy Policy – R789 | r-789game.com.pk',
+  description:
+    'Read R789\'s privacy policy to understand what data r-789game.com.pk collects, how it is used, and how your information is protected.',
+  keywords: ['R789 privacy policy', 'r-789game.com.pk privacy', 'data protection R789'],
+  robots: { index: true, follow: true },
+  alternates: { canonical: `${SITE_ORIGIN}${CORE_ROUTES.privacy}` },
   openGraph: {
-    title: 'Privacy Policy - Card Rummy',
-    description: 'Learn how Card Rummy protects your personal information and data.',
-    url: 'https://cardrummyapp.com.pk/privacy',
-    siteName: 'Card Rummy',
+    title: 'Privacy Policy – R789',
+    description: 'How R789 collects, uses, and protects your personal information.',
+    url: `${SITE_ORIGIN}${CORE_ROUTES.privacy}`,
+    siteName: 'R789',
     type: 'website',
-    images: [
-      {
-        url: 'https://cardrummyapp.com.pk/feature/og-image.webp',
-        width: 512,
-        height: 512,
-        alt: 'Card Rummy Privacy Policy',
-      },
-    ],
-  },
-  alternates: {
-    canonical: 'https://cardrummyapp.com.pk/privacy',
+    images: [{ url: `${SITE_ORIGIN}/feature/og-image.webp`, width: 1200, height: 630, alt: 'R789 Privacy Policy' }],
   },
 };
 
+function safeJson(obj: object) {
+  return JSON.stringify(obj).replace(/</g, '\\u003c');
+}
+
 export default function PrivacyPolicyPage() {
+  const pageUrl = `${SITE_ORIGIN}${CORE_ROUTES.privacy}`;
+
+  const schemaBreadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_ORIGIN },
+      { '@type': 'ListItem', position: 2, name: 'Privacy Policy', item: pageUrl },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-primary py-12 px-4">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJson(schemaBreadcrumb) }} />
+
       <div className="container mx-auto">
         <div className="max-w-4xl mx-auto">
-          {/* Hero Section */}
+
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb" className="mb-8">
+            <ol className="flex flex-wrap items-center gap-1 text-sm text-gray-400">
+              <li><Link href={CORE_ROUTES.home} className="hover:text-accent transition-colors">Home</Link></li>
+              <li aria-hidden="true" className="text-gray-600">›</li>
+              <li className="text-accent font-medium">Privacy Policy</li>
+            </ol>
+          </nav>
+
+          {/* Hero */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Privacy Policy</h1>
-            <p className="text-lg text-gray-400">Last Updated: January 3, 2026</p>
+            <p className="text-lg text-gray-400">Last Updated: October 2, 2026</p>
           </div>
-          
+
           <div className="bg-secondary rounded-2xl shadow-xl p-8 md:p-12">
             <div className="prose prose-lg max-w-none">
-              
+
+              {/* Introduction */}
               <div className="bg-[#0A1029] border-l-4 border-accent rounded-r-lg p-6 mb-8">
                 <h2 className="text-2xl font-bold mb-4 text-white">Introduction</h2>
                 <p className="text-gray-300 mb-4">
-                  <Link href="/" className="text-accent hover:underline font-semibold">Card Rummy</Link> ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application and website at <a href="https://www.cardrummyapp.com.pk" className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">www.cardrummyapp.com.pk</a> (collectively, the "Service").
-              </p>
+                  <Link href={CORE_ROUTES.home} className="text-accent hover:underline font-semibold">R789</Link>{' '}
+                  (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;) operates{' '}
+                  <a href={SITE_ORIGIN} className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">
+                    r-789game.com.pk
+                  </a>{' '}
+                  and the R789 Android application (collectively the &ldquo;Service&rdquo;). This Privacy Policy explains
+                  what data we collect, why we collect it, and how it is protected.
+                </p>
                 <p className="text-gray-300">
-                Please read this Privacy Policy carefully. By accessing or using our Service, you acknowledge that you have read, understood, and agree to be bound by all the terms outlined in this Privacy Policy.
-              </p>
+                  By accessing or using the Service you agree to this Privacy Policy. Please read it carefully.
+                </p>
               </div>
-              
+
+              {/* What we collect */}
               <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Information We Collect</h2>
-              
+
               <div className="bg-[#0A1029] rounded-xl p-6 mb-6">
-                <h3 className="text-2xl font-semibold mb-4 text-accent">Personal Data</h3>
-                <p className="text-gray-300 mb-4">
-                When you use our Service, we may collect personally identifiable information, such as:
-              </p>
+                <h3 className="text-2xl font-semibold mb-4 text-accent">Account &amp; Registration Data</h3>
                 <ul className="list-disc pl-6 space-y-2 text-gray-300">
-                  <li>Mobile phone number (for account registration)</li>
-                  <li>Email address (optional)</li>
-                <li>Device information (model, operating system, unique device identifiers)</li>
-                  <li>IP address and location data</li>
-                  <li>JazzCash/EasyPaisa account details for transactions</li>
-                  <li>Transaction history and payment information</li>
-                  <li>Gameplay data and statistics</li>
-              </ul>
-              </div>
-              
-              <div className="bg-[#0A1029] rounded-xl p-6 mb-8">
-                <h3 className="text-2xl font-semibold mb-4 text-accent">Usage Data</h3>
-                <p className="text-gray-300 mb-4">
-                We may also collect information on how the Service is accessed and used ("Usage Data"). This Usage Data may include:
-              </p>
-                <ul className="list-disc pl-6 space-y-2 text-gray-300">
-                  <li>Games played (Teen Patti, Rummy, Dragon vs Tiger, etc.) and time spent</li>
-                  <li>Deposits and withdrawals through JazzCash/EasyPaisa</li>
-                  <li>Bonus and rewards claimed</li>
-                  <li>Features accessed within the app</li>
-                  <li>Performance data and crash reports</li>
-                  <li>Referral activities</li>
-              </ul>
-              </div>
-              
-              <h2 className="text-3xl font-bold mt-12 mb-6 text-white">How We Use Your Information</h2>
-              <div className="bg-[#0A1029] rounded-xl p-6 mb-8">
-                <p className="text-gray-300 mb-4">
-                We use the collected data for various purposes:
-              </p>
-                <ul className="list-disc pl-6 space-y-2 text-gray-300">
-                  <li>To provide and maintain our Card Rummy gaming Service</li>
-                  <li>To verify your identity and prevent fraud</li>
-                  <li>To process deposits and withdrawals through JazzCash and EasyPaisa</li>
-                  <li>To notify you about changes, updates, or new features</li>
-                  <li>To allow you to participate in games and tournaments</li>
-                  <li>To provide customer support via live chat, WhatsApp, or email</li>
-                  <li>To send you daily bonus notifications and promotional offers</li>
-                  <li>To track referral rewards and commission payments</li>
-                  <li>To monitor gameplay for fair play and security</li>
-                  <li>To comply with legal obligations and regulations</li>
+                  <li>Mobile phone number (required for account creation)</li>
+                  <li>Email address (optional, used for account recovery)</li>
+                  <li>Device model, operating system version, and unique device identifiers</li>
+                  <li>IP address and approximate location (country/city level)</li>
                 </ul>
               </div>
-              
+
+              <div className="bg-[#0A1029] rounded-xl p-6 mb-8">
+                <h3 className="text-2xl font-semibold mb-4 text-accent">Payment &amp; Transaction Data</h3>
+                <ul className="list-disc pl-6 space-y-2 text-gray-300">
+                  <li>JazzCash, EasyPaisa, or Bank mobile wallet number (for deposits and withdrawals)</li>
+                  <li>Transaction amounts, timestamps, and reference IDs</li>
+                  <li>Bonus and reward claim history</li>
+                </ul>
+                <p className="text-gray-300 mt-3 text-sm">
+                  <strong className="text-white">Note:</strong> Your mobile wallet MPIN is never stored or transmitted to R789 servers. Authentication happens on your JazzCash, EasyPaisa, or Bank app.
+                </p>
+              </div>
+
+              <div className="bg-[#0A1029] rounded-xl p-6 mb-8">
+                <h3 className="text-2xl font-semibold mb-4 text-accent">Usage Data</h3>
+                <ul className="list-disc pl-6 space-y-2 text-gray-300">
+                  <li>Crash rounds played, stakes placed, cash-out timing</li>
+                  <li>Features accessed within the app</li>
+                  <li>App performance and crash/error reports</li>
+                  <li>Referral activities</li>
+                </ul>
+              </div>
+
+              {/* How we use it */}
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-white">How We Use Your Information</h2>
+              <div className="bg-[#0A1029] rounded-xl p-6 mb-8">
+                <ul className="list-disc pl-6 space-y-2 text-gray-300">
+                  <li>To operate and maintain the R789 Service</li>
+                  <li>To verify your identity and prevent fraud</li>
+                  <li>To process deposits and withdrawals via JazzCash, EasyPaisa, and Bank</li>
+                  <li>To send bonus notifications and important account updates</li>
+                  <li>To monitor crash rounds for fairness and security</li>
+                  <li>To provide customer support</li>
+                  <li>To comply with applicable Pakistani laws and regulations</li>
+                </ul>
+              </div>
+
+              {/* Payment security */}
               <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Payment Information Security</h2>
               <div className="bg-[#0A1029] rounded-xl p-6 mb-8">
-                <p className="text-gray-300 mb-4">
-                  Your payment security is our top priority. When you use JazzCash or EasyPaisa for deposits and withdrawals:
-                </p>
                 <ul className="list-disc pl-6 space-y-2 text-gray-300">
-                  <li>We use encrypted connections to protect your financial data</li>
-                  <li>Your mobile wallet PIN is never stored on our servers</li>
-                  <li>All transactions are processed through secure payment gateways</li>
-                  <li>We maintain detailed transaction logs for your security and reference</li>
-                  <li>Your account number is encrypted and stored securely</li>
-              </ul>
+                  <li>All data in transit is protected with SSL/TLS encryption</li>
+                  <li>Mobile wallet PINs are never stored on R789 servers</li>
+                  <li>Transactions are processed through the JazzCash, EasyPaisa, and Bank payment gateways</li>
+                  <li>Wallet numbers are stored in encrypted form</li>
+                </ul>
               </div>
-              
+
+              {/* Disclosure */}
               <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Disclosure of Data</h2>
-              
+
               <div className="bg-[#0A1029] rounded-xl p-6 mb-6">
                 <h3 className="text-2xl font-semibold mb-4 text-accent">Legal Requirements</h3>
                 <p className="text-gray-300">
-                  We may disclose your Personal Data if required to do so by law or in response to valid requests by public authorities in Pakistan (e.g., a court or a government agency).
-              </p>
-              </div>
-              
-              <div className="bg-[#0A1029] rounded-xl p-6 mb-8">
-                <h3 className="text-2xl font-semibold mb-4 text-accent">Third-Party Services</h3>
-                <p className="text-gray-300 mb-4">
-                  We may share limited data with:
+                  We may disclose your data if required by law or in response to valid requests from Pakistani public
+                  authorities (e.g., a court order or government investigation).
                 </p>
+              </div>
+
+              <div className="bg-[#0A1029] rounded-xl p-6 mb-8">
+                <h3 className="text-2xl font-semibold mb-4 text-accent">Third-Party Service Providers</h3>
                 <ul className="list-disc pl-6 space-y-2 text-gray-300">
-                  <li>Payment processors (JazzCash, EasyPaisa) for transaction processing</li>
-                  <li>Analytics services to improve our app performance</li>
-                  <li>Customer support tools to assist you better</li>
+                  <li>Payment processors (JazzCash, EasyPaisa) — necessary for transactions</li>
+                  <li>Analytics and crash-reporting tools — used only to improve app stability</li>
                 </ul>
                 <p className="text-gray-300 mt-4">
-                  We ensure all third parties comply with strict data protection standards.
-              </p>
+                  We do not sell, rent, or trade your personal data to advertisers or unrelated third parties.
+                </p>
               </div>
-              
+
+              {/* Data security */}
               <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Data Security</h2>
               <div className="bg-[#0A1029] rounded-xl p-6 mb-8">
-                <p className="text-gray-300 mb-4">
-                  The security of your data is important to us. We implement various security measures including:
-                </p>
                 <ul className="list-disc pl-6 space-y-2 text-gray-300">
-                  <li>SSL/TLS encryption for data transmission</li>
+                  <li>SSL/TLS encryption for all data in transit</li>
                   <li>Secure servers with firewall protection</li>
-                  <li>Regular security audits and updates</li>
-                  <li>Access controls and authentication systems</li>
-                  <li>Data backup and recovery procedures</li>
+                  <li>Regular security audits</li>
+                  <li>Access controls and multi-factor authentication for staff systems</li>
                 </ul>
                 <p className="text-gray-300 mt-4">
-                  However, no method of transmission over the Internet or electronic storage is 100% secure. While we strive to protect your Personal Data, we cannot guarantee absolute security.
-              </p>
+                  No method of electronic storage is 100% secure. We cannot guarantee absolute security, but we take
+                  commercially reasonable steps to protect your information.
+                </p>
               </div>
-              
-              <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Your Data Protection Rights</h2>
+
+              {/* Your rights */}
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Your Rights</h2>
               <div className="bg-[#0A1029] rounded-xl p-6 mb-8">
-                <p className="text-gray-300 mb-4">
-                  You have the following rights regarding your personal data:
-              </p>
                 <ul className="list-disc pl-6 space-y-2 text-gray-300">
-                  <li><strong className="text-white">Right to Access:</strong> Request a copy of your personal data</li>
-                  <li><strong className="text-white">Right to Rectification:</strong> Correct inaccurate or incomplete information</li>
-                  <li><strong className="text-white">Right to Erasure:</strong> Request deletion of your account and data</li>
-                  <li><strong className="text-white">Right to Object:</strong> Object to certain data processing activities</li>
-                  <li><strong className="text-white">Right to Data Portability:</strong> Receive your data in a structured format</li>
-                  <li><strong className="text-white">Right to Withdraw Consent:</strong> Withdraw consent for data processing at any time</li>
-              </ul>
+                  <li><strong className="text-white">Access:</strong> Request a copy of your personal data</li>
+                  <li><strong className="text-white">Rectification:</strong> Correct inaccurate information</li>
+                  <li><strong className="text-white">Erasure:</strong> Request deletion of your account and data</li>
+                  <li><strong className="text-white">Portability:</strong> Receive your data in a structured format</li>
+                  <li><strong className="text-white">Withdraw Consent:</strong> Withdraw consent for data processing at any time</li>
+                </ul>
                 <p className="text-gray-300 mt-4">
-                  To exercise any of these rights, please contact us at <a href="mailto:support@cardrummyapp.com.pk" className="text-accent hover:underline">support@cardrummyapp.com.pk</a>
-              </p>
+                  To exercise any of these rights, email us at{' '}
+                  <a href={`mailto:${SUPPORT_EMAIL}`} className="text-accent hover:underline">{SUPPORT_EMAIL}</a>.
+                </p>
               </div>
-              
+
+              {/* Age restriction */}
               <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Age Restriction</h2>
               <div className="bg-red-900/20 border-l-4 border-red-500 rounded-r-lg p-6 mb-8">
                 <p className="text-gray-300 mb-4">
-                  <strong className="text-white">Important:</strong> Card Rummy is intended only for users who are 18 years of age or older. We do not knowingly collect personally identifiable information from anyone under 18 years of age.
+                  <strong className="text-white">R789 is intended for users aged 18 and older.</strong> We do not
+                  knowingly collect data from anyone under 18. If you believe a minor has created an account, contact
+                  us immediately at{' '}
+                  <a href={`mailto:${SUPPORT_EMAIL}`} className="text-accent hover:underline">{SUPPORT_EMAIL}</a>.
                 </p>
-                <p className="text-gray-300">
-                  If you are a parent or guardian and you are aware that your child has provided us with Personal Data, please contact us immediately. If we become aware that we have collected Personal Data from users under 18 without verification of parental consent, we will take steps to remove that information from our servers.
-              </p>
               </div>
-              
+
+              {/* Cookies */}
               <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Cookies and Tracking</h2>
               <div className="bg-[#0A1029] rounded-xl p-6 mb-8">
                 <p className="text-gray-300 mb-4">
-                  We use cookies and similar tracking technologies to track activity on our Service and hold certain information. Cookies are files with small amounts of data which may include an anonymous unique identifier.
-                </p>
-                <p className="text-gray-300">
-                  You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some features of our Service.
+                  r-789game.com.pk uses cookies and similar technologies to remember preferences and analyse site
+                  traffic. You can disable cookies in your browser settings; some site features may not work fully
+                  without them.
                 </p>
               </div>
-              
-              <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Changes to This Privacy Policy</h2>
+
+              {/* Policy changes */}
+              <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Changes to This Policy</h2>
               <div className="bg-[#0A1029] rounded-xl p-6 mb-8">
-                <p className="text-gray-300 mb-4">
-                  We may update our Privacy Policy from time to time to reflect changes in our practices or for legal, regulatory, or operational reasons. We will notify you of any material changes by:
+                <p className="text-gray-300">
+                  We may update this Privacy Policy from time to time. Changes are effective when posted on this page.
+                  The &ldquo;Last Updated&rdquo; date at the top will always reflect the most recent revision. Continued
+                  use of the Service after changes constitutes acceptance of the updated policy.
                 </p>
-                <ul className="list-disc pl-6 space-y-2 text-gray-300">
-                  <li>Posting the new Privacy Policy on this page</li>
-                  <li>Updating the "Last Updated" date at the top</li>
-                  <li>Sending an in-app notification for significant changes</li>
-                </ul>
-                <p className="text-gray-300 mt-4">
-                You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
-              </p>
               </div>
-              
+
+              {/* Contact */}
               <h2 className="text-3xl font-bold mt-12 mb-6 text-white">Contact Us</h2>
               <div className="bg-accent/10 border-l-4 border-accent rounded-r-lg p-6 mb-4">
-                <p className="text-gray-300 mb-4">
-                  If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:
-              </p>
                 <ul className="space-y-3 text-gray-300">
                   <li className="flex items-center">
                     <svg className="w-5 h-5 text-accent mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                     </svg>
                     <strong className="text-white mr-2">Email:</strong>
-                    <a href="mailto:support@cardrummyapp.com.pk" className="text-accent hover:underline">support@cardrummyapp.com.pk</a>
+                    <a href={`mailto:${SUPPORT_EMAIL}`} className="text-accent hover:underline">{SUPPORT_EMAIL}</a>
                   </li>
                   <li className="flex items-center">
                     <svg className="w-5 h-5 text-accent mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd"/>
+                      <path fillRule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clipRule="evenodd" />
                     </svg>
                     <strong className="text-white mr-2">Website:</strong>
-                    <a href="https://www.cardrummyapp.com.pk" className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">www.cardrummyapp.com.pk</a>
+                    <a href={SITE_ORIGIN} className="text-accent hover:underline" target="_blank" rel="noopener noreferrer">{SITE_ORIGIN}</a>
                   </li>
                   <li className="flex items-center">
                     <svg className="w-5 h-5 text-accent mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/>
-                      <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"/>
+                      <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z" />
                     </svg>
-                    <strong className="text-white mr-2">Support:</strong>
-                    <Link href="/contact-us" className="text-accent hover:underline">Visit Contact Us page</Link>
+                    <strong className="text-white mr-2">Contact Form:</strong>
+                    <Link href={CORE_ROUTES.contact} className="text-accent hover:underline">Visit Contact Us page</Link>
                   </li>
-              </ul>
+                </ul>
               </div>
-              
+
               <div className="bg-[#0A1029] rounded-xl p-6 mt-8 text-center">
                 <p className="text-gray-400 text-sm mb-4">
-                  By using Card Rummy, you consent to this Privacy Policy and agree to its terms.
+                  By using R789, you consent to this Privacy Policy and agree to its terms.
                 </p>
-                <p className="text-gray-400 text-sm">
-                  © 2026 Card Rummy. All rights reserved.
-                </p>
+                <p className="text-gray-400 text-sm">© 2026 R789. All rights reserved.</p>
               </div>
+
             </div>
           </div>
+
         </div>
       </div>
     </div>
   );
-} 
+}

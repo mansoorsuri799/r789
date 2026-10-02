@@ -2,10 +2,11 @@
 
 import { useState, useEffect, useTransition } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import R789Logo from '@/components/R789Logo';
 import { useMobileMenu } from './MobileMenuProvider';
 import CtaButton from './CtaButton';
+import { APP_FILE_SIZE, APP_VERSION, CORE_ROUTES } from '@/lib/appFacts';
 
 type NavItem = {
   href: string;
@@ -29,7 +30,7 @@ const navSections: NavSection[] = [
     title: 'MAIN',
     items: [
       {
-        href: '/',
+        href: CORE_ROUTES.home,
         label: 'Home',
         icon: (
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -38,7 +39,7 @@ const navSections: NavSection[] = [
         ),
       },
       {
-        href: '/download-card-rummy',
+        href: CORE_ROUTES.download,
         label: 'Download',
         icon: (
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -52,7 +53,7 @@ const navSections: NavSection[] = [
     title: 'GUIDES',
     items: [
       {
-        href: '/deposit-money-in-card-rummy',
+        href: CORE_ROUTES.deposit,
         label: 'Deposit Guide',
         icon: (
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -61,7 +62,7 @@ const navSections: NavSection[] = [
         ),
       },
       {
-        href: '/withdraw-money-from-card-rummy',
+        href: CORE_ROUTES.withdraw,
         label: 'Withdraw Guide',
         icon: (
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -70,7 +71,7 @@ const navSections: NavSection[] = [
         ),
       },
       {
-        href: '/card-rummy-for-pc',
+        href: CORE_ROUTES.pc,
         label: 'PC Version',
         icon: (
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -84,7 +85,7 @@ const navSections: NavSection[] = [
     title: 'INFO',
     items: [
       {
-        href: '/about-us',
+        href: CORE_ROUTES.about,
         label: 'About Us',
         icon: (
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -93,7 +94,7 @@ const navSections: NavSection[] = [
         ),
       },
       {
-        href: '/blog',
+        href: CORE_ROUTES.blog,
         label: 'Blog',
         icon: (
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -102,7 +103,7 @@ const navSections: NavSection[] = [
         ),
       },
       {
-        href: '/contact-us',
+        href: CORE_ROUTES.contact,
         label: 'Contact Us',
         icon: (
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -180,25 +181,15 @@ export default function MobileNavigation() {
       <MenuButton onClick={toggleMenu} isOpen={isOpen} />
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-[#080A21]">
-          {/* Header */}
+        <div className="fixed inset-0 z-50 flex flex-col bg-[#061428]">
           <div className="flex justify-between items-center px-5 py-4 border-b border-gray-800/80">
             <Link href="/" className="flex items-center gap-3" onClick={closeMenu}>
-              <div className="relative w-9 h-9 flex-shrink-0 rounded-lg overflow-hidden">
-                <Image
-                  src="/card-rummy.webp"
-                  alt="Card Rummy Logo"
-                  fill
-                  sizes="36px"
-                  className="object-contain"
-                  priority
-                />
-              </div>
-              <span className="text-white text-lg font-bold tracking-tight">Card Rummy</span>
+              <R789Logo variant="mobile" alt="R789 logo" priority />
+              <span className="text-white text-lg font-bold tracking-tight">R789</span>
             </Link>
             <button
               onClick={closeMenu}
-              className="flex items-center justify-center w-10 h-10 rounded-full bg-[#1a1f35] text-white hover:bg-[#252b45] transition-colors"
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-[#0A1A33] text-white hover:bg-[#122744] transition-colors"
               aria-label="Close menu"
             >
               <svg
@@ -214,9 +205,8 @@ export default function MobileNavigation() {
             </button>
           </div>
 
-          {/* Nav sections */}
           <div className="relative flex-1 overflow-y-auto">
-            <div className="absolute right-0 top-0 bottom-0 w-1 bg-[#0BA5E9]" aria-hidden="true" />
+            <div className="absolute right-0 top-0 bottom-0 w-1 bg-[#0EA5E9]" aria-hidden="true" />
 
             <nav className="px-5 py-2 pb-6">
               {navSections.map((section) => (
@@ -257,13 +247,12 @@ export default function MobileNavigation() {
             </nav>
           </div>
 
-          {/* Footer CTA */}
           <div className="px-5 pt-4 pb-8 border-t border-gray-800/80 flex flex-col items-center">
-            <CtaButton onClick={closeMenu} ariaLabel="Download Card Rummy app for Android">
+            <CtaButton onClick={closeMenu} ariaLabel="Download R789 APK for Android">
               DOWNLOAD NOW
             </CtaButton>
             <p className="text-center text-gray-500 text-xs mt-3">
-              49MB · Android 5.0+ · V1.231 (2026 Update)
+              {APP_FILE_SIZE} · Android 5.0+ · {APP_VERSION}
             </p>
           </div>
         </div>

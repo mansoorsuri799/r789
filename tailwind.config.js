@@ -8,11 +8,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#06091F',
-        accent: '#FFC107',
+        // Derived from R789 app icon: deep navy + vivid sky blue
+        primary: '#061428',
+        accent: '#38BDF8',
       },
     },
   },
   plugins: [],
 }
-

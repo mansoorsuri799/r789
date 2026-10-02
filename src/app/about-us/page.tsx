@@ -1,164 +1,171 @@
 import { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
-import Script from 'next/script';
-import { FACEBOOK_PROFILE_URL } from '@/lib/appFacts';
+import { SITE_ORIGIN } from '@/lib/schemaImageLicensing';
+import { SUPPORT_EMAIL, CORE_ROUTES } from '@/lib/appFacts';
 import CtaButton from '@/components/CtaButton';
+import R789Logo from '@/components/R789Logo';
 
 export const metadata: Metadata = {
-  title: 'About Card Rummy - Pakistan\'s Premier Card Gaming Platform',
-  description: 'Learn about Card Rummy, our history, mission, and vision for creating the best card gaming platform in Pakistan with Teen Patti, Rummy and more.',
-  keywords: ['Card Rummy about', 'about us', 'gaming company Pakistan', 'Card Rummy history', 'card gaming platform', 'Teen Patti', '3 Patti'],
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  alternates: {
-    canonical: "https://cardrummyapp.com.pk/about-us",
-  },
+  title: 'About R789 – Pakistan Gaming Platform | r-789game.com.pk',
+  description:
+    "Learn about R789, R789 at r-789game.com.pk. Our mission: clear guides, honest facts, and responsible gaming info for Pakistani players.",
+  keywords: ['about R789', 'R789 about us', 'R789 Pakistan crash game', 'r-789game.com.pk about'],
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
+  alternates: { canonical: `${SITE_ORIGIN}${CORE_ROUTES.about}` },
   openGraph: {
-    title: 'About Card Rummy - Pakistan\'s Premier Card Gaming Platform',
-    description: 'Learn about Card Rummy, our history, mission, and vision for creating the best card gaming platform in Pakistan with real cash rewards.',
-    url: "https://cardrummyapp.com.pk/about-us",
-    siteName: "Card Rummy",
-    locale: "en_US",
-    type: "website",
-    images: [
-      {
-        url: "https://cardrummyapp.com.pk/feature/og-image.webp",
-        width: 512,
-        height: 512,
-        alt: "About Card Rummy - Premier Card Gaming Platform",
-      }
-    ],
+    title: 'About R789 – Pakistan Gaming Platform',
+    description: "About r-789game.com.pk — R789 guide site.",
+    url: `${SITE_ORIGIN}${CORE_ROUTES.about}`,
+    siteName: 'R789',
+    locale: 'en_US',
+    type: 'website',
+    images: [{ url: `${SITE_ORIGIN}/feature/og-image.webp`, width: 1200, height: 630, alt: 'About R789 – Pakistan Crash Game' }],
   },
   twitter: {
-    card: "summary_large_image",
-    title: 'About Card Rummy - Pakistan\'s Premier Card Gaming Platform',
-    description: 'Learn about Card Rummy, our history, mission, and vision for creating the best card gaming platform in Pakistan with real cash rewards.',
-    images: ["https://cardrummyapp.com.pk/feature/twitter-card.webp"],
+    card: 'summary_large_image',
+    title: 'About R789 – Pakistan Gaming Platform',
+    description: "About r-789game.com.pk — R789 guide site.",
+    images: [`${SITE_ORIGIN}/feature/twitter-card.webp`],
   },
 };
 
+function safeJson(obj: object) {
+  return JSON.stringify(obj).replace(/</g, '\\u003c');
+}
+
 export default function AboutPage() {
+  const pageUrl = `${SITE_ORIGIN}${CORE_ROUTES.about}`;
+
+  const schemaAbout = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'R789',
+      url: SITE_ORIGIN,
+      logo: `${SITE_ORIGIN}/r789.webp`,
+      description:
+        'R789 is a lightweight Android game for Pakistan. Deposit from PKR 100, withdraw from PKR 200 via JazzCash, EasyPaisa, and Bank.',
+      foundingDate: '2026',
+      foundingLocation: { '@type': 'Country', name: 'Pakistan' },
+      contactPoint: { '@type': 'ContactPoint', email: SUPPORT_EMAIL, contactType: 'Customer Support', availableLanguage: ['English', 'Urdu'] },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+  };
+
+  const schemaBreadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_ORIGIN },
+      { '@type': 'ListItem', position: 2, name: 'About Us', item: pageUrl },
+    ],
+  };
+
   return (
     <article className="min-h-screen bg-primary py-12 px-4">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJson(schemaAbout) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJson(schemaBreadcrumb) }} />
+
       <div className="container mx-auto">
         <div className="max-w-4xl mx-auto">
-          {/* Hero Section */}
+
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb" className="mb-8">
+            <ol className="flex flex-wrap items-center gap-1 text-sm text-gray-400">
+              <li><Link href={CORE_ROUTES.home} className="hover:text-accent transition-colors">Home</Link></li>
+              <li aria-hidden="true" className="text-gray-600">›</li>
+              <li className="text-accent font-medium">About Us</li>
+            </ol>
+          </nav>
+
+          {/* Hero */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">About Us</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">About R789</h1>
+            <p className="text-lg text-gray-400">Pakistan's Trusted Gaming Platform – r-789game.com.pk</p>
           </div>
-          
-          {/* Main Content */}
+
+          {/* Main intro */}
           <div className="bg-secondary rounded-2xl shadow-xl p-8 md:p-12 mb-12">
-            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16 lg:gap-20 mb-8">
-              <div className="w-full md:w-1/3 flex-shrink-0 flex justify-center md:justify-start">
-                <Link href="/" className="block">
-                  <div className="relative w-[280px] h-[280px] md:w-[320px] md:h-[320px] mx-auto md:mx-0 rounded-lg overflow-hidden bg-[#0A1029]">
-                    <Image 
-                      src="/card-rummy.webp" 
-                      alt="Card Rummy – Pakistan's Premier Card Gaming Platform"
-                      title="About Card Rummy – Pakistan's #1 Card Game App"
-                      width={320}
-                      height={320}
-                      sizes="(max-width: 768px) 280px, 320px"
-                      className="object-contain p-4 w-full h-full"
-                      priority
-                    />
-                  </div>
+            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16 mb-8">
+              <div className="w-full md:w-1/3 flex-shrink-0 flex justify-center">
+                <Link href={CORE_ROUTES.home} className="block">
+                  <R789Logo
+                    variant="about"
+                    alt="R789 official logo for Android Pakistan"
+                    title="R789 – Pakistan Gaming Platform"
+                    priority
+                  />
                 </Link>
               </div>
-              <div className="md:w-2/3 md:pl-4 lg:pl-6">
-                <div className="prose prose-lg max-w-none">
-                  <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                    Welcome to <a href="https://www.cardrummyapp.com.pk/" className="text-accent hover:text-accent font-semibold" target="_blank" rel="noopener noreferrer">www.cardrummyapp.com.pk</a>, a trusted platform to provide the latest information about 3patti <Link href="/" className="text-accent hover:underline font-semibold">Card Rummy</Link>. This is one of the most popular online casino games in Pakistan, having <span className="font-bold text-accent">500K+ users</span>. <a href="https://pkcardrummy.com/?from_gameid=6276686&channelCode=6191689" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-semibold">Download Card Rummy</a> now to join thousands of players earning real cash rewards.
-                  </p>
-                  <p className="text-lg text-gray-300 leading-relaxed">
-                    Hundreds of people are playing these wonderful games and earning a handsome amount on a daily or weekly basis.
-                  </p>
-                </div>
+              <div className="md:w-2/3">
+                <p className="text-lg text-gray-300 leading-relaxed mb-6">
+                  Welcome to{' '}
+                  <a href={SITE_ORIGIN} className="text-accent hover:underline font-semibold">
+                    r-789game.com.pk
+                  </a>
+                  , the official information site for{' '}
+                  <Link href={CORE_ROUTES.home} className="text-accent hover:underline font-semibold">R789</Link> — a
+                  lightweight game designed for Pakistani Android users. In R789, players stake chips on a
+                  live multiplier that rises each round, then decide when to cash out before the plane disappears.
+                </p>
+                <p className="text-lg text-gray-300 leading-relaxed">
+                  Deposits start from <strong className="text-white">PKR 100</strong> and withdrawals from{' '}
+                  <strong className="text-white">PKR 200</strong>, paid via <strong className="text-white">JazzCash</strong>,{' '}
+                  <strong className="text-white">EasyPaisa</strong>, or <strong className="text-white">Bank</strong> transfer.
+                </p>
               </div>
             </div>
           </div>
-          
-          {/* Our Aim Section */}
+
+          {/* Mission */}
           <div className="bg-gradient-to-r from-orange-600 to-orange-500 rounded-2xl shadow-xl p-8 md:p-12 mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white text-center">Our Aim!</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white text-center">Our Mission</h2>
             <p className="text-lg md:text-xl text-white leading-relaxed text-center">
-              Our aim is to provide the users with the latest and updated information and earning tips about Card Rummy. For any type of information or query, you can visit our <Link href="/contact-us" className="underline hover:text-orange-100 font-semibold">contact us page</Link>.
+              r-789game.com.pk exists to give Pakistani players clear, accurate information about R789: how the crash
+              mechanic works, how to deposit and withdraw safely, and what to expect from bonuses and account features —
+              without hype or inflated income promises. Have a question?{' '}
+              <Link href={CORE_ROUTES.contact} className="underline hover:text-orange-100 font-semibold">
+                Contact us
+              </Link>{' '}
+              anytime.
             </p>
           </div>
-          
+
+          {/* What we cover */}
+          <div className="bg-secondary rounded-2xl shadow-xl p-8 md:p-12 mb-12">
+            <h2 className="text-2xl font-bold mb-6 text-white">What You&apos;ll Find on This Site</h2>
+            <ul className="space-y-3 text-gray-300">
+              {[
+                { href: CORE_ROUTES.download, label: 'Download guide – APK link, install steps, version info.' },
+                { href: CORE_ROUTES.deposit, label: 'Deposit guide – JazzCash, EasyPaisa, and Bank from PKR 100.' },
+                { href: CORE_ROUTES.withdraw, label: 'Withdrawal guide – Cash out from PKR 200 step by step.' },
+                { href: CORE_ROUTES.pc, label: 'PC guide – How to run R789 via Android emulator on Windows.' },
+                { href: CORE_ROUTES.blog, label: 'Blog – Crash strategy, safety tips, bonus breakdowns, account fixes.' },
+              ].map(({ href, label }) => (
+                <li key={href} className="flex items-start">
+                  <svg className="w-5 h-5 text-accent mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <Link href={href} className="text-accent hover:underline">{label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Contact CTA */}
           <div className="bg-secondary rounded-2xl shadow-xl p-8 text-center">
-            <h2 className="text-2xl font-bold mb-4 text-white">Have Questions?</h2>
+            <h2 className="text-2xl font-bold mb-4 text-white">Have a Question?</h2>
             <p className="text-gray-300 mb-6 text-lg">
-              We're here to help! Contact our team for any information or queries about Card Rummy.
+              Reach our support team at{' '}
+              <a href={`mailto:${SUPPORT_EMAIL}`} className="text-accent hover:underline font-semibold">{SUPPORT_EMAIL}</a>{' '}
+              or use the contact form.
             </p>
-            <CtaButton href="/contact-us" icon="arrow">Contact Us</CtaButton>
+            <CtaButton href={CORE_ROUTES.contact} icon="arrow">Contact Us</CtaButton>
           </div>
+
         </div>
       </div>
-
-      <Script
-        id="about-page-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "AboutPage",
-            "mainEntity": {
-              "@type": "Organization",
-              "name": "Card Rummy",
-              "alternateName": "3 Patti Card Rummy",
-              "url": "https://cardrummyapp.com.pk",
-              "logo": "https://cardrummyapp.com.pk/card-rummy.webp",
-              "description": "Card Rummy is Pakistan's premier card gaming platform, offering Teen Patti, Rummy, Dragon vs Tiger and more with real cash rewards.",
-              "foundingDate": "2024",
-              "foundingLocation": {
-                "@type": "Country",
-                "name": "Pakistan"
-              },
-              "sameAs": [
-                FACEBOOK_PROFILE_URL
-              ],
-              "founder": {
-                "@type": "Person",
-                "name": "Erio Card Rummy Dev"
-              }
-            },
-            "about": {
-              "@type": "Thing",
-              "name": "Card Gaming Platform",
-              "description": "Online card gaming platform with real cash rewards serving Pakistani users"
-            },
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "@id": "https://cardrummyapp.com.pk/about-us"
-            }
-          })
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cardrummyapp.com.pk" },
-              { "@type": "ListItem", "position": 2, "name": "About Us", "item": "https://cardrummyapp.com.pk/about-us" }
-            ]
-          })
-        }}
-      />
     </article>
   );
-} 
+}
