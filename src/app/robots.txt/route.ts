@@ -66,13 +66,14 @@ User-agent: *
 Disallow: /api/
 Disallow: /_next/
 
+Sitemap: ${SITE_ORIGIN}/sitemap.xml
 Sitemap: ${SITE_ORIGIN}/sitemap-index.xml
 `;
 
   return new Response(body, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "public, max-age=3600, s-maxage=3600",
+      "Cache-Control": "public, max-age=0, s-maxage=300, must-revalidate",
     },
   });
 }

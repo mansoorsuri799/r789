@@ -1,5 +1,6 @@
 import { SITE_ORIGIN } from "@/lib/schemaImageLicensing";
 import { SITEMAP_PAGES, escapeXml } from "@/lib/sitemapData";
+import { SITEMAP_XML_HEADERS } from "@/lib/sitemapResponse";
 
 export function GET() {
   const urls = SITEMAP_PAGES.map((page) => {
@@ -17,10 +18,5 @@ export function GET() {
 ${urls}
 </urlset>`;
 
-  return new Response(body, {
-    headers: {
-      "Content-Type": "application/xml; charset=utf-8",
-      "Cache-Control": "public, max-age=3600, s-maxage=3600",
-    },
-  });
+  return new Response(body, { headers: SITEMAP_XML_HEADERS });
 }

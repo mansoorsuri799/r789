@@ -92,11 +92,6 @@ const nextConfig = {
         destination: '/r789.webp',
         permanent: true,
       },
-      {
-        source: '/sitemap.xml',
-        destination: '/index.xml',
-        permanent: true,
-      },
     ];
   },
 
@@ -134,6 +129,42 @@ const nextConfig = {
   // Optimize headers
   async headers() {
     return [
+      // Sitemaps / robots: never pin a long CDN TTL (stale 404/redirect breaks GSC fetch).
+      {
+        source: '/sitemap.xml',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=0, s-maxage=300, must-revalidate' },
+          { key: 'Content-Type', value: 'application/xml; charset=utf-8' },
+        ],
+      },
+      {
+        source: '/sitemap-index.xml',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=0, s-maxage=300, must-revalidate' },
+          { key: 'Content-Type', value: 'application/xml; charset=utf-8' },
+        ],
+      },
+      {
+        source: '/index.xml',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=0, s-maxage=300, must-revalidate' },
+          { key: 'Content-Type', value: 'application/xml; charset=utf-8' },
+        ],
+      },
+      {
+        source: '/image-sitemap.xml',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=0, s-maxage=300, must-revalidate' },
+          { key: 'Content-Type', value: 'application/xml; charset=utf-8' },
+        ],
+      },
+      {
+        source: '/robots.txt',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=0, s-maxage=300, must-revalidate' },
+          { key: 'Content-Type', value: 'text/plain; charset=utf-8' },
+        ],
+      },
       // HTML pages: always revalidate so Googlebot gets fresh content.
       // Exclude /_next/static so Next.js can manage hashed-asset caching
       // (custom Cache-Control there breaks HMR in development).
